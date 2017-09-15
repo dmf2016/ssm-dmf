@@ -11,5 +11,7 @@
   	<module>rabbitmq</module>
   	<module>spring-rabbit</module>
   	<module>spring-rabbit-client</module>
+  	<module>spring-rabbit-producer</module>
+  	<module>com.gst.rabbitmq.consumer</module>
   </modules>
 </project>
