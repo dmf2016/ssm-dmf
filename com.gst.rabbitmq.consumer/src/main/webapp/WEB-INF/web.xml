@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="cop" version="2.5">
+	<display-name>cop-manager</display-name>
+	<welcome-file-list>
+		<welcome-file>login.html</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>rabbitmq-consumer-web.root</param-value>
+	</context-param>
+	<!-- 加载spring 配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-content.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+</web-app>
