@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+	<context:property-placeholder location="classpath:application.properties" />
+
+	<!-- 创建connectionFactory -->
+	<bean id="rabbitConnectionFactory"
+		class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+		<constructor-arg value="${rabbit.hosts}" />
+		<property name="username" value="${rabbit.username}" />
+		<property name="password" value="${rabbit.password}" />
+		<property name="virtualHost" value="${rabbit.virtualHost}" />
+		<property name="channelCacheSize" value="5" />
+	</bean>
+	<bean id="testServiceImpl"
+		class="com.gst.rabbitmq.producer.rpc.service.impl.TestServiceImpl" />
+
+	<bean id="testServiceExport"
+		class="com.rabbitmq.spring.remoting.RabbitInvokerServiceExporter">
+		<property name="channelFactory" ref="rabbitConnectionFactory" />
+		<property name="serviceInterface"
+			value="com.gst.rabbitmq.producer.rpc.service.TestService" />
+		<property name="service" ref="testServiceImpl" />
+		<property name="exchange" value="${rabbit.exchange}" />
+		<!-- 必须大写 -->
+		<property name="exchangeType" value="TOPIC" />
+		<property name="routingKey" value="${rabbit.routingKey}" />
+		<property name="queueName" value="${rabbit.queue}" />
+		<property name="poolsize" value="5" />
+	</bean>
+
+</beans>

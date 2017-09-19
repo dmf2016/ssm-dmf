@@ -10,8 +10,7 @@
   	<module>spring-node-2</module>
   	<module>rabbitmq</module>
   	<module>spring-rabbit</module>
-  	<module>spring-rabbit-client</module>
-  	<module>spring-rabbit-producer</module>
-  	<module>com.gst.rabbitmq.consumer</module>
+  	<module>spring-rabbitmq-consumer</module>
+  	<module>spring-rabbitmq-producer</module>
   </modules>
 </project>
